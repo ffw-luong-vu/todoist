@@ -14,12 +14,33 @@ function toDoListReducer(state, action) {
   }
 
   if (action.type === "REMOVE_ITEM") {
-    const existingCartItemIndex = state.items.findIndex(
+    const existingItemIndex = state.items.findIndex(
       (item) => item.id === action.id
     );
     const updatedItems = [...state.items];
-    updatedItems.splice(existingCartItemIndex, 1);
+    updatedItems.splice(existingItemIndex, 1);
+    return { ...state, items: updatedItems };
+  }
 
+  if (action.type === "COMPLETE_ITEM") {
+    const existingItemIndex = state.items.findIndex(
+      (item) => item.id === action.id
+    );
+    const updatedItems = [...state.items];
+    updatedItems[existingItemIndex].completed = true;
+    return { ...state, items: updatedItems };
+  }
+
+  if (action.type === "EDIT_ITEM") {
+    const existingItemIndex = state.items.findIndex(
+      (item) => item.id === action.id
+    );
+    const updatedItems = [...state.items];
+    updatedItems.splice(
+      existingItemIndex,
+      updatedItems[existingItemIndex],
+      action.item
+    );
     return { ...state, items: updatedItems };
   }
 
@@ -39,10 +60,20 @@ export function ToDoListContextProvider({ children }) {
     dispatchToDoListAction({ type: "REMOVE_ITEM", id });
   }
 
+  function completeItem(id) {
+    dispatchToDoListAction({ type: "COMPLETE_ITEM", id });
+  }
+
+  function editItem(item) {
+    dispatchToDoListAction({ type: "EDIT_ITEM", item });
+  }
+
   const cartContext = {
     items: toDoList.items,
     addItem,
     removeItem,
+    completeItem,
+    editItem,
   };
 
   return (
