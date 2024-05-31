@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useContext } from "react";
 import Form from "./Form";
+import ModalContext from "../store/ModalContext";
 
 const Modal = () => {
-  const [showModal, setShowModal] = useState();
+  const modalStore = useContext(ModalContext);
 
   return (
     <>
-      {showModal && (
+      {modalStore.isModalOpen && (
         <>
           <div
             id="default-modal"
@@ -16,12 +17,12 @@ const Modal = () => {
           >
             <div className="relative p-4 w-full max-w-2xl max-h-full">
               {/* Modal content */}
-              <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-700">
+              <div className="relative p-4 bg-white rounded-lg shadow ">
                 <Form />
               </div>
             </div>
           </div>
-          <div className="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40"></div>
+          <div className="bg-gray-900/50  fixed inset-0 z-40"></div>
         </>
       )}
     </>

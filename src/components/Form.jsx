@@ -2,32 +2,43 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ToDoListContext from "../store/ToDoListContext";
 import { useContext, useRef, useState } from "react";
+import ModalContext from "../store/ModalContext";
 
-const Form = ({ closeForm }) => {
+const Form = () => {
   const titleElement = useRef();
   const descriptionElement = useRef();
   const [startDate, setStartDate] = useState(new Date());
-  const store = useContext(ToDoListContext);
+  const toDoListStore = useContext(ToDoListContext);
+  const modalStore = useContext(ModalContext);
+
   const submitForm = (e) => {
     e.preventDefault();
     const enteredTitle = titleElement.current.value;
     const enteredDescription = descriptionElement.current.value;
     const formatter = new Intl.DateTimeFormat("en-US", { dateStyle: "long" });
     const formattedDate = formatter.format(startDate);
-    store.addItem({
-      id: new Date().valueOf(),
+
+    const item = {
+      id: modalStore.isModalEdit
+        ? modalStore.itemEdit.id
+        : new Date().valueOf(),
       title: enteredTitle,
       description: enteredDescription,
       date: formattedDate,
       completed: false,
-    });
+    };
+    if (modalStore.isModalEdit) {
+      toDoListStore.editItem(item);
+    } else {
+      toDoListStore.addItem(item);
+    }
     e.target.reset();
-    closeForm();
+    modalStore.toggleModal();
   };
   return (
     <form onSubmit={submitForm}>
       <h1 className="mb-4 text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 md:text-5xl lg:text-6xl">
-        New task
+        {modalStore.isModalEdit ? "Edit Task" : "New Task"}
       </h1>
       <div className="grid gap-6">
         <div>
@@ -44,12 +55,15 @@ const Form = ({ closeForm }) => {
             placeholder="Title"
             ref={titleElement}
             required
+            defaultValue={
+              modalStore.isModalEdit ? modalStore?.itemEdit?.title : ""
+            }
           />
         </div>
         <div>
           <label
             htmlFor="input-title"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-gray-900 "
           >
             Description
           </label>
@@ -60,12 +74,15 @@ const Form = ({ closeForm }) => {
             placeholder="Description"
             ref={descriptionElement}
             required
+            defaultValue={
+              modalStore.isModalEdit ? modalStore?.itemEdit?.description : ""
+            }
           />
         </div>
         <div>
           <label
             htmlFor="input-date"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
             Date
           </label>
@@ -81,12 +98,12 @@ const Form = ({ closeForm }) => {
             type="submit"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
           >
-            Add
+            {modalStore.isModalEdit ? "Edit" : "Add"}
           </button>
           <button
             type="button"
             className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
-            onClick={closeForm}
+            onClick={() => modalStore.toggleModal()}
           >
             Cancel
           </button>

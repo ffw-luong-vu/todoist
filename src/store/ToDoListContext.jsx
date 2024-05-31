@@ -33,14 +33,10 @@ function toDoListReducer(state, action) {
 
   if (action.type === "EDIT_ITEM") {
     const existingItemIndex = state.items.findIndex(
-      (item) => item.id === action.id
+      (item) => item.id === action.item.id
     );
     const updatedItems = [...state.items];
-    updatedItems.splice(
-      existingItemIndex,
-      updatedItems[existingItemIndex],
-      action.item
-    );
+    updatedItems.splice(existingItemIndex, 1, action.item);
     return { ...state, items: updatedItems };
   }
 
