@@ -10,7 +10,7 @@ function App() {
     <ModalContextProvider>
       <ToDoListContextProvider>
         <Header />
-        <main className="max-w-md mx-auto p-6">
+        <main className="max-w-md mx-auto p-8">
           <AddToDo />
           <ToDoList />
         </main>
