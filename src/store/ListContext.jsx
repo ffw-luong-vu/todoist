@@ -1,9 +1,13 @@
 import { createContext, useReducer } from "react";
 
-const ToDoListContext = createContext({
+const ListContext = createContext({
   items: [],
+  singleItem: {},
   addItem: () => {},
   removeItem: () => {},
+  completeItem: () => {},
+  editItem: () => {},
+  getSingleItem: () => {},
 });
 
 function toDoListReducer(state, action) {
@@ -40,12 +44,21 @@ function toDoListReducer(state, action) {
     return { ...state, items: updatedItems };
   }
 
+  if (action.type === "GET_ITEM") {
+    console.log(action.id);
+    const existingItem = state.items.find(
+      (item) => String(item.id) === String(action.id)
+    );
+    console.log(existingItem);
+    return { ...state, singleItem: existingItem };
+  }
   return state;
 }
 
-export function ToDoListContextProvider({ children }) {
+export function ListContextProvider({ children }) {
   const [toDoList, dispatchToDoListAction] = useReducer(toDoListReducer, {
     items: [],
+    singleItem: null,
   });
 
   function addItem(item) {
@@ -64,19 +77,23 @@ export function ToDoListContextProvider({ children }) {
     dispatchToDoListAction({ type: "EDIT_ITEM", item });
   }
 
+  function getSingleItem(id) {
+    dispatchToDoListAction({ type: "GET_ITEM", id });
+  }
+
   const cartContext = {
     items: toDoList.items,
+    singleItem: toDoList.singleItem,
     addItem,
     removeItem,
     completeItem,
     editItem,
+    getSingleItem,
   };
 
   return (
-    <ToDoListContext.Provider value={cartContext}>
-      {children}
-    </ToDoListContext.Provider>
+    <ListContext.Provider value={cartContext}>{children}</ListContext.Provider>
   );
 }
 
-export default ToDoListContext;
+export default ListContext;
