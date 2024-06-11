@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #f8fafc;
+    min-height: 100vh;
+  }
+
+  button {
+    @apply text-white text-sm shadow-md transition-all hover:shadow-lg rounded-lg px-5 py-2.5;
+  }
+
+  .btn-icon {
+    @apply shadow-none hover:shadow-none hover:bg-gray-200 p-3;
+  }
+
+  input {
+    @apply bg-gray-50 border border-gray-300   rounded-lg outline-none block w-full p-2.5;
+  }
+}

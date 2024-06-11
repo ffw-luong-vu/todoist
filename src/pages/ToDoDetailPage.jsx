@@ -1,7 +1,7 @@
-import SingleTodo from "../components/SingleTodo";
+import ToDoDetail from "../components/ToDoDetail";
 
 const ToDoDetailPage = () => {
-  return <SingleTodo />;
+  return <ToDoDetail />;
 };
 
 export default ToDoDetailPage;

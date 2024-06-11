@@ -2,27 +2,20 @@ import { NavLink, Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="max-w-md mx-auto px-6">
-      <nav className="bg-white border-gray-200  py-2.5 ">
-        <div className="flex  justify-between items-center mx-auto max-w-screen-xl">
-          <Link to="/" className="flex items-center">
-            <img
-              src="https://flowbite.com/docs/images/logo.svg"
-              className="mr-3 h-6 sm:h-9"
-              alt="Flowbite Logo"
-            />
-            <span className="self-center text-xl font-semibold whitespace-nowrap">
-              Todoist
-            </span>
+    <header className="grid max-w-md mx-auto place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
+      <nav className="mx-auto w-full block  rounded-xl border border-white/80 bg-white bg-opacity-80 px-6 py-3 text-white shadow-md backdrop-blur-2xl backdrop-saturate-200">
+        <div className="flex  justify-between items-center mx-auto max-w-screen-xl text-gray-900">
+          <Link to="/" className="text-xl font-bold whitespace-nowrap">
+            Todoist
           </Link>
-          <div className="justify-between items-center flex" id="mobile-menu-2">
+          <div className="justify-between items-center flex">
             <ul className="flex font-medium lg:space-x-8">
               <li>
                 <NavLink
                   to="/"
                   className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 text-gray-700 hover:text-red-700  lg:p-0 ${
-                      isActive ? "text-red-700" : undefined
+                    `block py-2 pr-4 pl-3 hover:text-blue-500  lg:p-0 ${
+                      isActive ? "text-blue-500" : undefined
                     }`
                   }
                 >
@@ -33,8 +26,8 @@ const Header = () => {
                 <NavLink
                   to="/completed"
                   className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 text-gray-700 hover:text-red-700  lg:p-0 ${
-                      isActive ? "text-red-700" : undefined
+                    `block py-2 pr-4 pl-3 hover:text-blue-500  lg:p-0 ${
+                      isActive ? "text-blue-500" : undefined
                     }`
                   }
                 >
