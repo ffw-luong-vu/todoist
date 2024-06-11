@@ -17,8 +17,8 @@ const AddToDo = () => {
       description: enteredDescription,
       completed: false,
     };
-    store.addItem(item);
     e.target.reset();
+    store.addItem(item);
   };
 
   return (
