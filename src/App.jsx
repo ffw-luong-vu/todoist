@@ -4,11 +4,11 @@ import CompletedPage from "./pages/CompletedPage";
 import DetailPage from "./pages/DetailPage";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
-import { ListContextProvider } from "./store/ListContext";
+import { ToDoListContextProvider } from "./store/ToDoListContext";
 
 function App() {
   return (
-    <ListContextProvider>
+    <ToDoListContextProvider>
       <Router>
         <Routes>
           <Route path="/" element={<RootLayout />}>
@@ -19,7 +19,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
-    </ListContextProvider>
+    </ToDoListContextProvider>
   );
 }
 

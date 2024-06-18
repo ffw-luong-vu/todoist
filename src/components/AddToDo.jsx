@@ -1,11 +1,10 @@
 import { useRef } from "react";
-import ListContext from "../store/ListContext";
-import { useContext } from "react";
+import { useToDoListContext } from "../store/ToDoListContext";
 
 const AddToDo = () => {
   const titleElement = useRef();
   const descriptionElement = useRef();
-  const store = useContext(ListContext);
+  const store = useToDoListContext();
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -18,7 +17,7 @@ const AddToDo = () => {
       completed: false,
     };
     e.target.reset();
-    store.addItem(item);
+    store.addToDo(item);
   };
 
   return (

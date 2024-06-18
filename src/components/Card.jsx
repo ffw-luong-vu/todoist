@@ -1,11 +1,10 @@
-import { useContext } from "react";
+import { useToDoListContext } from "../store/ToDoListContext";
 import { FaCheck, FaEdit, FaTimes } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import ListContext from "../store/ListContext";
 
 const Card = ({ todo, isToDoDetail, setEditing }) => {
   const navigate = useNavigate();
-  const { completeItem, removeItem } = useContext(ListContext);
+  const { completeToDo, removeToDo } = useToDoListContext();
 
   return (
     <div
@@ -36,7 +35,7 @@ const Card = ({ todo, isToDoDetail, setEditing }) => {
           <button
             type="button"
             className=" btn-icon text-green-700"
-            onClick={() => completeItem(todo.id)}
+            onClick={() => completeToDo(todo.id)}
           >
             <FaCheck />
           </button>
@@ -46,8 +45,8 @@ const Card = ({ todo, isToDoDetail, setEditing }) => {
           type="button"
           className=" btn-icon text-red-700"
           onClick={() => {
-            removeItem(todo.id);
-            if (todo.completed) {
+            removeToDo(todo.id);
+            if (isToDoDetail) {
               navigate("/");
             }
           }}

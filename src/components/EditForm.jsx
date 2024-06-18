@@ -1,10 +1,10 @@
-import { useContext, useRef } from "react";
-import ListContext from "../store/ListContext";
+import { useRef } from "react";
+import { useToDoListContext } from "../store/ToDoListContext";
 
-const EditForm = ({ todo, setEditing, isToDoDetail }) => {
+const EditForm = ({ todo, setEditing }) => {
   const titleElement = useRef();
   const descriptionElement = useRef();
-  const { editItem, getSingleItem } = useContext(ListContext);
+  const { editToDo } = useToDoListContext();
 
   const submitEdit = () => {
     const enteredTitle = titleElement.current.value;
@@ -14,9 +14,8 @@ const EditForm = ({ todo, setEditing, isToDoDetail }) => {
       title: enteredTitle,
       description: enteredDescription,
     };
-    editItem(newItem);
+    editToDo(newItem);
     setEditing(false);
-    if (isToDoDetail) getSingleItem(todo.id);
   };
 
   return (

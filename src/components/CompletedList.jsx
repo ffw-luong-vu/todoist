@@ -1,14 +1,21 @@
 import ToDo from "./ToDoItem";
-import ListContext from "../store/ListContext";
-import { useContext } from "react";
+import { useToDoListContext } from "../store/ToDoListContext";
 
 const CompletedList = () => {
-  const store = useContext(ListContext);
+  const { toDoList } = useToDoListContext();
+  const completedList = toDoList.filter((toDo) => toDo.completed === true);
+
+  if (completedList.length === 0)
+    return (
+      <h1 className="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 ">
+        Nothing has been done yet
+      </h1>
+    );
+
   return (
-    <div className="relative flex flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+    <div className="rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
       <ul className="flex flex-col gap-1">
-        {store.items.map((todo) => {
-          if (todo.completed !== true) return;
+        {completedList.map((todo) => {
           return <ToDo key={todo.id} todo={todo} />;
         })}
       </ul>

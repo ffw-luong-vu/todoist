@@ -14,13 +14,7 @@ const ToDo = ({ todo, isToDoDetail }) => {
           setEditing={setIsEditing}
         />
       )}
-      {isEditing && (
-        <EditForm
-          todo={todo}
-          setEditing={setIsEditing}
-          isToDoDetail={isToDoDetail}
-        />
-      )}
+      {isEditing && <EditForm todo={todo} setEditing={setIsEditing} />}
     </li>
   );
 };
