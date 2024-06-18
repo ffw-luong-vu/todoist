@@ -1,10 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ListContextProvider } from "./store/ListContext";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import RootLayout from "./components/RootLayout";
-import HomePage from "./pages/HomePage";
 import CompletedPage from "./pages/CompletedPage";
-import ToDoDetailPage from "./pages/ToDoDetailPage";
+import DetailPage from "./pages/DetailPage";
 import ErrorPage from "./pages/ErrorPage";
+import HomePage from "./pages/HomePage";
+import { ListContextProvider } from "./store/ListContext";
 
 function App() {
   return (
@@ -13,10 +13,8 @@ function App() {
         <Routes>
           <Route path="/" element={<RootLayout />}>
             <Route index element={<HomePage />} />
-            <Route path="completed">
-              <Route index element={<CompletedPage />} />
-            </Route>
-            <Route path="detail/:todoId" element={<ToDoDetailPage />} />
+            <Route path="completed" element={<CompletedPage />} />
+            <Route path="detail/:todoId" element={<DetailPage />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
