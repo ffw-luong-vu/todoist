@@ -1,12 +1,25 @@
-# Vercel
+# Project Title
 
-https://todoist-ffw-luong-vu.vercel.app/
+todoist
 
-# React + Vite
+## Demo link:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Access my site at [todoist app](https://todoist-ffw-luong-vu.vercel.app/)
 
-Currently, two official plugins are available:
+## About The App
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Todoist] is the world's favorite task manager and to-do list app. Finally become focused, organized and calm.
+
+## Technologies
+
+I used `React`, `Tailwind`, ...
+
+## Setup
+
+- download or clone the repository
+- run `npm install`
+- run `npm run dev`
+
+## License
+
+MIT license @ [ffw-luong-vu](https://github.com/ffw-luong-vu/)
