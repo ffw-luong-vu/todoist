@@ -45,11 +45,9 @@ function toDoListReducer(state, action) {
   }
 
   if (action.type === "GET_ITEM") {
-    console.log(action.id);
     const existingItem = state.items.find(
       (item) => String(item.id) === String(action.id)
     );
-    console.log(existingItem);
     return { ...state, singleItem: existingItem };
   }
   return state;

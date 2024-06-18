@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
-import ListContext from "../store/ListContext";
 import { useContext, useEffect } from "react";
-import ToDo from "./ToDoItem";
+import { useParams } from "react-router-dom";
+import NotFound from "../components/NotFound";
+import ToDo from "../components/ToDoItem";
+import ListContext from "../store/ListContext";
 
-const SingleToDo = () => {
+const DetailPage = () => {
   const { todoId } = useParams();
   const { getSingleItem, singleItem } = useContext(ListContext);
 
@@ -11,8 +12,8 @@ const SingleToDo = () => {
     getSingleItem(todoId);
   }, [todoId]);
 
-  if (!singleItem) return <h1>Loading</h1>;
+  if (!singleItem) return <NotFound />;
   return <ToDo todo={singleItem} isToDoDetail={true} />;
 };
 
-export default SingleToDo;
+export default DetailPage;
